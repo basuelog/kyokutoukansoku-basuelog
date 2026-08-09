@@ -1,0 +1,142 @@
+ * {
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ }
+ body {
+ background-color: #0b0d10;
+ background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+ url('desktop_wallpaper.jpg'); 
+ background-size: cover;
+ background-position: center;
+ background-attachment: fixed;
+ 
+ color: #39FF14;
+ font-family: "Hiragino Mincho ProN", "Yu Mincho", serif;
+ font-size: 14px;
+ line-height: 1.6;
+ display: block;
+ overflow: hidden;
+ /* ホログラムの「眩しい発光」を強化 */
+ text-shadow: 0 0 4px #39FF14, 0 0 12px rgba(57, 255, 20, 0.5);
+ }
+ 
+ button {
+ font: inherit;
+ }
+ h1, h2, h3, p, div, span, hr { display: block; }
+ .container {
+ display: grid;
+ grid-template-columns: 280px 1fr;
+ height: 100vh;
+ box-sizing: border-box;
+ 
+ /* 枠線をネオン管のように光らせる */
+ border: 1px solid #39FF14;
+ box-shadow: 0 0 15px rgba(57, 255, 20, 0.2), inset 0 0 15px rgba(57, 255, 20, 0.1);
+ 
+ /* 背景を半透明にして、うしろの部屋を透かす */
+ background: rgba(5, 20, 5, 0.65);
+ /* 空間の歪み（ガラス越しのような高級感）を出す */
+ backdrop-filter: blur(4px); 
+ 
+ /* ホログラムが空中に浮いているように、少し余白を作る */
+ margin: 20px;
+ height: calc(100vh - 40px);
+ }
+ /* ── 走査線（スキャンライン）をホログラム風に薄く調整 ── */
+ body::before {
+ content: " ";
+ display: block;
+ position: fixed;
+ top: 0; left: 0; bottom: 0; right: 0;
+ /* ホログラム独特の細い横縞のエフェクト */
+ background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(57, 255, 20, 0.08) 50%);
+ background-size: 100% 3px;
+ z-index: 9999;
+ pointer-events: none;
+ }
+ html.glitch-active body::before {
+ opacity: 0.4;
+ background-color: rgba(0, 255, 0, 0.05);
+ }
+ .sidebar {
+ border-right: 1px solid rgba(57, 255, 20, 0.4);
+ padding: 20px;
+ overflow-y: auto;
+ }
+ .sidebar h3 {
+ border-bottom: 1px solid #39FF14;
+ padding-bottom: 5px;
+ margin-bottom: 15px;
+ }
+ .log-link {
+ padding: 8px 5px;
+ cursor: pointer;
+ margin-bottom: 5px;
+ transition: background 0.1s;
+ }
+ .log-link:hover {
+ background-color: rgba(57, 255, 20, 0.15);
+ }
+ .main-content { padding: 40px; overflow-y: auto; }
+ .article-title { font-size: 18px; margin-bottom: 10px; }
+ .typing-box::after {
+ content: "■";
+ animation: blink 0.8s infinite;
+ margin-left: 4px;
+ }
+ @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
+
+ /* ── 思想確認用オーバレイ ── */
+ #intro-overlay {
+ position: fixed;
+ top: 0; left: 0; width: 100%; height: 100%;
+ background-color: #05070a;
+ z-index: 10000;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ padding: 20px;
+ }
+ .warning-box {
+ max-width: 550px;
+ border: 1px dashed #39FF14;
+ padding: 30px;
+ margin-bottom: 30px;
+ box-shadow: 0 0 15px rgba(57, 255, 20, 0.1);
+ }
+ .intro-text { 
+ line-height: 1.8; 
+ text-align: left;
+ }       
+ .btn-group {
+ display: flex;
+ gap: 30px;
+ }
+ .boot-btn {
+ background: transparent;
+ color: #39FF14;
+ border: 1px solid #39FF14;
+ padding: 10px 30px;
+ cursor: pointer;
+ transition: all 0.2s;
+ text-shadow: 0 0 4px #39FF14;
+ }
+ .boot-btn:hover { 
+ background-color: #39FF14; 
+ color: #05070a; 
+ font-weight: bold;
+ box-shadow: 0 0 15px #39FF14;
+ }
+ .deny-btn {
+ border-color: #555;
+ color: #555;
+ text-shadow: none;
+ }
+ .deny-btn:hover {
+ background-color: #1a1f26;
+ color: #555;
+ box-shadow: none;
+ }

@@ -1,0 +1,19 @@
+---
+interface Props {
+  response: any;
+}
+
+const { response } = Astro.props;
+---
+
+<div class="sidebar">
+  <h3>■ 極東観測 場末碌</h3>
+  {response.contents.map((content: any) => (
+    <div 
+      class="log-link" 
+      data-log-id={content.id}
+    >
+      ▶ {content.title}
+    </div>
+  ))}
+</div>

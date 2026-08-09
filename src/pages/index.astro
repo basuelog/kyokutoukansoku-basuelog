@@ -1,0 +1,56 @@
+---
+//components接続情報
+import { createClient } from 'microcms-js-sdk';
+import './styles/index.css';
+import IntroOverlay from '../components/IntroOverlay.astro';
+import Sidebar from '../components/Sidebar.astro';
+import MainContent from '../components/MainContent.astro';
+
+//API接続情報
+const client = createClient({
+ serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN, 
+ apiKey: import.meta.env.MICROCMS_API_KEY, 
+});
+
+//記事情報取得処理
+const response = await client.get({ 
+ endpoint: 'logs',
+ queries: { fields: 'id,title', limit: 100 } 
+});
+---
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="UTF-8">
+ <title>極東観測 場末碌</title>
+ <link rel="icon" href="/favicon.ico">
+</head>
+<body>
+ <IntroOverlay />
+ 
+ <div class="container">
+ <Sidebar response={response} />
+ <MainContent />
+ </div>
+ 
+ <script>
+  import { beepPlayer } from '../utils/audio';
+  import { startSystem } from '../utils/ui';
+  import { selectLog, setupLogLinks } from '../utils/log';
+
+  const playBeepBound = (freq: number, dur: number) => beepPlayer.playBeep(freq, dur);
+
+  const selectLogHandler = (logId: string, logTitle: string) => selectLog(logId, logTitle, playBeepBound);
+  
+  setupLogLinks(playBeepBound, selectLogHandler);
+
+  document.getElementById('boot-btn')?.addEventListener('click', startSystem);
+  
+  document.getElementById('deny-btn')?.addEventListener('click', () => {
+    playBeepBound(200, 0.3);
+    alert('一般社会への退避シーケンスを実行します。');
+    window.location.href = 'https://google.com';
+  });
+ </script>
+</body>
+</html>
