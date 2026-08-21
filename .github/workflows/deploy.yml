@@ -1,6 +1,8 @@
 name: Deploy 'FAR EAST OBS' to Pages
 
 on:
+  push:
+    branches: [main]
   repository_dispatch:
     types: [microcms_webhook]
   workflow_dispatch:
@@ -28,7 +30,7 @@ jobs:
       - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: npm
 
       - name: Install System Packages
